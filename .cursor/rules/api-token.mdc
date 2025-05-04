@@ -1,0 +1,29 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# API_TOKEN Configuration & Usage
+
+This rule captures where and how the `API_TOKEN` env var is set up and consumed in the project:
+
+- **Environment variables**  
+  - [.dev.vars](mdc:.dev.vars): define `API_TOKEN` for local development.  
+  - Production secret: `npx wrangler secret put API_TOKEN` (see [README.md](mdc:README.md)).  
+
+- **Setup documentation**  
+  - [README.md](mdc:README.md): Steps 3 and 6 explain obtaining, setting, and deploying `API_TOKEN` for both local and production environments.  
+
+- **Wrangler configuration**  
+  - [wrangler.jsonc](mdc:wrangler.jsonc) does not explicitly list `API_TOKEN`, but runtime code references `Astro.locals.runtime.env.API_TOKEN`.  
+
+- **Layout & UI**  
+  - [src/layouts/Layout.astro](mdc:src/layouts/Layout.astro): uses `Astro.locals.runtime.env.API_TOKEN` to conditionally render admin navigation.  
+  - [src/components/admin/api-token-missing-card.tsx](mdc:src/components/admin/api-token-missing-card.tsx): renders a warning card if `API_TOKEN` is absent.  
+
+- **API Endpoints**  
+  - [src/pages/api](mdc:src/pages/api): each file destructures `API_TOKEN` from `locals.runtime.env` to authenticate REST calls.  
+
+- **Admin Pages**  
+  - [src/pages/admin/customers.astro](mdc:src/pages/admin/customers.astro) and [src/pages/admin/subscriptions.astro](mdc:src/pages/admin/subscriptions.astro): import `API_TOKEN` to pass into client components for protected operations.
+

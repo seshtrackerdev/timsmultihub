@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Structure Guide
+
+This rule describes the main directories and entry points of the personal Cloudflare hub:
+
+- **Landing Page**
+  - [src/pages/index.astro](mdc:src/pages/index.astro): Linktree-style public hub layout with hero, links, and dark-mode toggle.
+- **Content**
+  - [src/content/links.json](mdc:src/content/links.json): JSON file defining the list of links and icons.
+  - [src/content/projects](mdc:src/content/projects): MDX files for individual project showcases.
+  - [src/content/resume.mdx](mdc:src/content/resume.mdx): Résumé content for `/resume` route.
+- **Authentication & Admin**
+  - [src/pages/_auth.astro](mdc:src/pages/_auth.astro): Hidden minimal login form, protected by a single `HUB_PASSWORD` env var.
+  - [src/pages/admin.astro](mdc:src/pages/admin.astro): Protected admin dashboard for managing content and workflows.
+- **Routing & Layouts**
+  - [src/pages/projects/[slug].astro](mdc:src/pages/projects/[slug].astro): Dynamic project detail pages.
+  - [src/layouts/Layout.astro](mdc:src/layouts/Layout.astro): Shared page wrapper for admin and public pages.
+- **Styling & Theme**
+  - [src/styles/globals.css](mdc:src/styles/globals.css): Global CSS imports and base styles.
+  - [tailwind.config.mjs](mdc:tailwind.config.mjs): Tailwind theme extensions (colors, fonts).
+- **Edge & Build**
+  - [wrangler.jsonc](mdc:wrangler.jsonc): Cloudflare Workers configuration and D1 binding.
+  - [.dev.vars](mdc:.dev.vars): Environment variables (`API_TOKEN`, `DATABASE_ID`, `HUB_PASSWORD`).
+- **Utilities & Services**
+  - [src/lib/services](mdc:src/lib/services): Database and workflow services for D1 and authoring.
+
+Refer to these file references when navigating or making changes to this project.
+
